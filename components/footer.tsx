@@ -8,7 +8,7 @@ import {
   VisuallyHidden,
 } from "@chakra-ui/react";
 import { ReactNode } from "react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 
 const SocialButton = ({
   children,
@@ -42,7 +42,7 @@ const SocialButton = ({
   );
 };
 
-export default function SmallWithSocial() {
+export default function Footer() {
   return (
     <Box
       bg={useColorModeValue("gray.50", "gray.900")}
@@ -57,12 +57,23 @@ export default function SmallWithSocial() {
         justify={{ base: "center", md: "space-between" }}
         align={{ base: "center", md: "center" }}
       >
-        <Text>Kevin Leung - Built with NextJS and Chakra UI.</Text>
+        <Text display={{ base: "none", md: "flex" }}>
+          © 2021 Kevin Leung - Built with NextJS and Chakra UI.
+        </Text>
         <Stack direction={"row"} spacing={6}>
-          <SocialButton label={"Twitter"} href={"#"}>
+          <SocialButton label={"Email"} href={"mailto:contact@kevs.tech"}>
+            <FaEnvelope />
+          </SocialButton>
+          <SocialButton
+            label={"LinkedIn"}
+            href={"https://www.linkedin.com/in/kevinleung987/"}
+          >
             <FaLinkedin />
           </SocialButton>
-          <SocialButton label={"YouTube"} href={"#"}>
+          <SocialButton
+            label={"GitHub"}
+            href={"https://github.com/kevinleung987"}
+          >
             <FaGithub />
           </SocialButton>
         </Stack>

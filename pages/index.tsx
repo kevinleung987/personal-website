@@ -1,34 +1,24 @@
-import { Container, Link, Text } from "@chakra-ui/react";
-import Head from "next/head";
-import SmallWithSocial from "../components/footer";
-import WithSubnavigation from "./../components/navbar";
+import { Heading, Link, Text } from "@chakra-ui/react";
 
 export default function Home() {
   return (
-    <div>
-      <Head>
-        <title>Kevins Site</title>
-        <meta
-          name="description"
-          content="Software Engineer with a passion for building great products."
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <WithSubnavigation />
-      <Container>
-        <Text fontSize="3xl">Hi! Im Kevin!</Text>
-        <p>
-          My new website is currently under construction, you can find the old
-          website{" "}
-          <Link color="teal.500" href="https://old.kevs.tech/">
-            here.
-          </Link>
-        </p>
-      </Container>
-      <footer>
-        <SmallWithSocial />
-      </footer>
-    </div>
+    <>
+      <Heading size="xl">Hi! I'm Kevin! 🙋‍♂️</Heading>
+      <Text fontSize="xl" pt={"8"}>
+        My new website is currently under construction, you can find the old
+        website{" "}
+        <Link color="teal.500" href="https://old.kevs.tech/">
+          here.
+        </Link>
+      </Text>
+      <Text fontSize="xl" pt={"8"}>
+        Hello! I'm a recent graudate from the University of Toronto where I
+        studied Computer Science.
+      </Text>
+      <Text fontSize="xl" pt={"8"}>
+        Currently I'm working as a Software Engineer at Google in the San
+        Francisco Bay Area.
+      </Text>
+    </>
   );
 }

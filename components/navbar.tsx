@@ -21,10 +21,15 @@ export default function NavBar() {
 
   return (
     <chakra.header w="full" px={{ base: 2, sm: 4 }} py={4} shadow="md" bg={bg}>
-      <Flex alignItems="center" justifyContent="space-between" mx="auto">
+      <Flex alignItems="center" justifyContent="space-evenly" mx="auto">
         <Flex>
           <Link href="/" passHref>
-            <chakra.h1 cursor="pointer" fontSize="xl" fontWeight="medium" ml="2">
+            <chakra.h1
+              cursor="pointer"
+              fontSize="xl"
+              fontWeight="medium"
+              ml="2"
+            >
               Kevs.tech
             </chakra.h1>
           </Link>
@@ -36,17 +41,33 @@ export default function NavBar() {
             color="brand.500"
             display={{ base: "none", md: "inline-flex" }}
           >
-            <Button variant="ghost" onClick={() => router.push("blog")}>
+            <Button
+              variant="ghost"
+              fontWeight="medium"
+              onClick={() => router.push("blog")}
+            >
               Blog
             </Button>
-            <Button variant="ghost" onClick={() => router.push("experience")}>Experience</Button>
-            <Button variant="ghost" onClick={() => router.push("projects")}>Projects</Button>
             <Button
-              leftIcon={colorMode === "light" ? <SunIcon /> : <MoonIcon />}
-              onClick={toggleColorMode}
+              variant="ghost"
+              fontWeight="medium"
+              onClick={() => router.push("experience")}
             >
-              Toggle Dark Mode
+              Experience
             </Button>
+            <Button
+              variant="ghost"
+              fontWeight="medium"
+              onClick={() => router.push("projects")}
+            >
+              Projects
+            </Button>
+            <IconButton
+              aria-label="Toggle Dark Mode"
+              icon={colorMode === "light" ? <SunIcon /> : <MoonIcon />}
+              onClick={toggleColorMode}
+              isRound={true}
+            />
           </HStack>
           <Box display={{ base: "inline-flex", md: "none" }}>
             <IconButton

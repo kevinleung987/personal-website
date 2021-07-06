@@ -1,7 +1,7 @@
-import { Container, Link, Text } from "@chakra-ui/layout";
+import { Box, Center } from "@chakra-ui/react";
 import Head from "next/head";
 import React from "react";
-import SmallWithSocial from "./footer";
+import Footer from "./footer";
 import NavBar from "./navbar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -28,10 +28,23 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
       <NavBar />
 
-      {children}
+      <Center>
+        <Box
+          w="full"
+          mx="auto"
+          maxW="3xl"
+          minH="100%"
+          px={{ base: "6", md: "8" }}
+          pt={"12"}
+          // TODO: Fix footer and padding.
+          pb={"24"}
+        >
+          {children}
+        </Box>
+      </Center>
 
       <footer>
-        <SmallWithSocial />
+        <Footer />
       </footer>
     </div>
   );
