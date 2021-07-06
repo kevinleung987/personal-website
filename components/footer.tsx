@@ -57,7 +57,7 @@ export default function SmallWithSocial() {
         justify={{ base: "center", md: "space-between" }}
         align={{ base: "center", md: "center" }}
       >
-        <Text>Kevin Leung - Last updated ...</Text>
+        <Text>Kevin Leung - Built with NextJS and Chakra UI.</Text>
         <Stack direction={"row"} spacing={6}>
           <SocialButton label={"Twitter"} href={"#"}>
             <FaLinkedin />
