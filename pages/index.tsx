@@ -1,4 +1,4 @@
-import { chakra, Center, Container, Text, Link } from "@chakra-ui/react";
+import { Container, Link, Text } from "@chakra-ui/react";
 import Head from "next/head";
 import SmallWithSocial from "../components/footer";
 import WithSubnavigation from "./../components/navbar";

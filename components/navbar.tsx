@@ -9,10 +9,13 @@ import {
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React from "react";
+import Link from "next/link";
 
-export default function Gslr() {
-  const bg = useColorModeValue("white", "gray.700");
+export default function NavBar() {
+  const router = useRouter();
+  const bg = useColorModeValue("gray.200", "gray.700");
   const { colorMode, toggleColorMode } = useColorMode();
   // const mobileNav = useDisclosure();
 
@@ -20,9 +23,11 @@ export default function Gslr() {
     <chakra.header w="full" px={{ base: 2, sm: 4 }} py={4} shadow="md" bg={bg}>
       <Flex alignItems="center" justifyContent="space-between" mx="auto">
         <Flex>
-          <chakra.h1 fontSize="xl" fontWeight="medium" ml="2">
-            Kevs.tech
-          </chakra.h1>
+          <Link href="/" passHref>
+            <chakra.h1 cursor="pointer" fontSize="xl" fontWeight="medium" ml="2">
+              Kevs.tech
+            </chakra.h1>
+          </Link>
         </Flex>
         <HStack display="flex" alignItems="center" spacing={1}>
           <HStack
@@ -31,9 +36,11 @@ export default function Gslr() {
             color="brand.500"
             display={{ base: "none", md: "inline-flex" }}
           >
-            <Button variant="ghost">Blog</Button>
-            <Button variant="ghost">Experience</Button>
-            <Button variant="ghost">Projects</Button>
+            <Button variant="ghost" onClick={() => router.push("blog")}>
+              Blog
+            </Button>
+            <Button variant="ghost" onClick={() => router.push("experience")}>Experience</Button>
+            <Button variant="ghost" onClick={() => router.push("projects")}>Projects</Button>
             <Button
               leftIcon={colorMode === "light" ? <SunIcon /> : <MoonIcon />}
               onClick={toggleColorMode}
