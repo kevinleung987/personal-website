@@ -20,6 +20,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* Open Graph Tags */}
+        {/* TODO: Open Graph Description and other tags missing. */}
         <meta property="og:title" content="Kevin Leung" />
         <meta property="og:image" content="http://kevs.tech/logo.png" />
         <meta name="robots" content="noindex,nofollow" />
@@ -33,19 +34,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           w="full"
           mx="auto"
           maxW="3xl"
-          minH="100%"
-          px={{ base: "6", md: "8" }}
+          minH="md"
+          px={"2"}
           pt={"12"}
-          // TODO: Fix footer and padding.
           pb={"24"}
         >
           {children}
         </Box>
       </Center>
 
-      <footer>
-        <Footer />
-      </footer>
+      <Footer />
     </div>
   );
 }

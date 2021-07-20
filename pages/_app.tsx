@@ -3,9 +3,10 @@ import "@fontsource/open-sans";
 import "@fontsource/roboto";
 import type { AppProps } from "next/app";
 import Layout from "../components/layout";
-import "../styles/globals.css";
+import '../styles/code.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
+  // TODO: Figure out font loading issue.
   const theme = extendTheme({
     config: { initialColorMode: "dark" },
     fonts: {
@@ -13,6 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       body: "Open Sans",
     },
   });
+  // const { colorMode } = useColorMode();
   return (
     <ChakraProvider theme={theme}>
       <Layout>

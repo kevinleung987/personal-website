@@ -1,53 +1,72 @@
-import fs from "fs";
-import matter from "gray-matter";
+import { Divider, Heading } from "@chakra-ui/react";
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
-import path from "path";
 import MDXComponents from "../../components/mdx-components";
-import { Heading, Text } from "@chakra-ui/react";
-import readingTime from "reading-time";
+import TopButton from "../../components/top-button";
+import { FrontMatter, getPostBySlug, getSlugs } from "../../lib/blog";
 
 interface IProps {
   mdxSource: any;
-  time: string;
-  frontMatter: any;
+  readingTime: string;
+  frontMatter: FrontMatter;
 }
 
-export default function Post({ mdxSource, time, frontMatter }: IProps) {
+export default function Post({ mdxSource, readingTime, frontMatter }: IProps) {
   return (
     <>
-      <Heading fontSize="3xl">Reading Time: {time}</Heading>
+      <Heading fontSize="6xl">{frontMatter.title}</Heading>
+      <Heading fontSize="xl">Published: {frontMatter.date}</Heading>
+      <Heading fontSize="xl">Reading Time: {readingTime}</Heading>
+      <Heading fontSize="3xl" py={"6"}>
+        {frontMatter.description}
+      </Heading>
+      <Divider />
       <MDXRemote {...mdxSource} components={MDXComponents} />
-      {/* {frontMatter} */}
+      <TopButton />
     </>
   );
 }
 
 export async function getStaticPaths() {
+  // TODO: Investigate further. https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation
   return {
     fallback: false,
-    paths: fs.readdirSync(path.join(process.cwd(), "posts")).map((post) => ({
+    paths: getSlugs().map((slug) => ({
       params: {
-        slug: post.replace(/\.mdx/, ""),
+        slug,
       },
     })),
   };
 }
 
-// TODO: Refactor into a lib.
 export async function getStaticProps({
   params,
 }: {
   params: any;
 }): Promise<{ props: IProps }> {
-  const slug: string = params.slug;
-  const source = fs.readFileSync(
-    path.join(process.cwd(), "posts", slug + ".mdx"),
-    "utf8"
-  );
+  const post = getPostBySlug(params.slug);
+  if (post == null) {
+    throw new Error();
+  }
 
-  const { data, content } = matter(source);
-  const time = readingTime(content).text;
-  const mdxSource = await serialize(content);
-  return { props: { mdxSource, time, frontMatter: data } };
+  // remark-slug: Adds IDs to every heading.
+  // remark-toc: Creates Table of contents TODO: Create own?
+  // mdx-prism + remark-code-titles: Creates code blocks with syntax highlighting and title of file.
+  const mdxSource = await serialize(post.content, {
+    mdxOptions: {
+      remarkPlugins: [
+        require("remark-slug"),
+        require("remark-code-titles"),
+        require("remark-toc"),
+      ],
+      rehypePlugins: [require("mdx-prism")],
+    },
+  });
+  return {
+    props: {
+      mdxSource,
+      readingTime: post.readingTime,
+      frontMatter: post.frontMatter,
+    },
+  };
 }

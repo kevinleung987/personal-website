@@ -45,22 +45,26 @@ const SocialButton = ({
 export default function Footer() {
   return (
     <Box
-      bg={useColorModeValue("gray.50", "gray.900")}
+      as="footer"
       color={useColorModeValue("gray.700", "gray.200")}
+      mt={"24"}
+      left={"0"}
+      bottom={"0"}
+      width={"100%"}
     >
       <Container
         as={Stack}
-        maxW={"6xl"}
-        py={4}
+        maxW={"3xl"}
+        py={"4"}
         direction={{ base: "column", md: "row" }}
-        spacing={4}
+        spacing={"4"}
         justify={{ base: "center", md: "space-between" }}
         align={{ base: "center", md: "center" }}
       >
         <Text display={{ base: "none", md: "flex" }}>
           © 2021 Kevin Leung - Built with NextJS and Chakra UI.
         </Text>
-        <Stack direction={"row"} spacing={6}>
+        <Stack direction={"row"} spacing={"6"}>
           <SocialButton label={"Email"} href={"mailto:contact@kevs.tech"}>
             <FaEnvelope />
           </SocialButton>

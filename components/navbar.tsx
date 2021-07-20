@@ -1,67 +1,62 @@
 import { HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import {
   Box,
-  Button,
   chakra,
   Flex,
   HStack,
   IconButton,
+  Link,
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
-import Link from "next/link";
 
 export default function NavBar() {
   const router = useRouter();
-  const bg = useColorModeValue("gray.200", "gray.700");
+  const bg = useColorModeValue(undefined, "gray.700");
   const { colorMode, toggleColorMode } = useColorMode();
   // const mobileNav = useDisclosure();
 
   return (
-    <chakra.header w="full" px={{ base: 2, sm: 4 }} py={4} shadow="md" bg={bg}>
-      <Flex alignItems="center" justifyContent="space-evenly" mx="auto">
+    <chakra.header
+      w="full"
+      px={{ base: "2", sm: "4" }}
+      py={"4"}
+      shadow="md"
+      bg={bg}
+    >
+      <Flex
+        alignItems="center"
+        justifyContent="space-between"
+        mx="auto"
+        maxW="3xl"
+      >
         <Flex>
-          <Link href="/" passHref>
-            <chakra.h1
-              cursor="pointer"
-              fontSize="xl"
-              fontWeight="medium"
-              ml="2"
-            >
+          <NextLink href="/" passHref>
+            <Link cursor="pointer" fontSize="xl" fontWeight="medium" ml="2">
               Kevs.tech
-            </chakra.h1>
-          </Link>
+            </Link>
+          </NextLink>
         </Flex>
         <HStack display="flex" alignItems="center" spacing={1}>
           <HStack
-            spacing={1}
-            mr={1}
+            spacing={"1"}
+            mr={"1"}
             color="brand.500"
             display={{ base: "none", md: "inline-flex" }}
           >
-            <Button
-              variant="ghost"
-              fontWeight="medium"
-              onClick={() => router.push("blog")}
-            >
-              Blog
-            </Button>
-            <Button
-              variant="ghost"
-              fontWeight="medium"
-              onClick={() => router.push("experience")}
-            >
-              Experience
-            </Button>
-            <Button
-              variant="ghost"
-              fontWeight="medium"
-              onClick={() => router.push("projects")}
-            >
-              Projects
-            </Button>
+            {/* TODO: Make Custom Link Component */}
+            <NextLink href="/blog" passHref>
+              <Link px={"3"}>Blog</Link>
+            </NextLink>
+            <NextLink href="/experience" passHref>
+              <Link px={"3"}>Experience</Link>
+            </NextLink>
+            <NextLink href="/projects" passHref>
+              <Link px={"3"}>Projects</Link>
+            </NextLink>
             <IconButton
               aria-label="Toggle Dark Mode"
               icon={colorMode === "light" ? <SunIcon /> : <MoonIcon />}
@@ -69,6 +64,7 @@ export default function NavBar() {
               isRound={true}
             />
           </HStack>
+          {/* TODO: Mobile nav */}
           <Box display={{ base: "inline-flex", md: "none" }}>
             <IconButton
               display={{ base: "flex", md: "none" }}
