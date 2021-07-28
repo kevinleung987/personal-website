@@ -16,14 +16,14 @@ export default function BlogCard(props: PostData) {
   return (
     <Box
       mx="auto"
-      my={"4"}
-      px={"8"}
-      py={"4"}
+      my="4"
+      px="8"
+      py="4"
       rounded="lg"
       shadow="lg"
       bg={useColorModeValue("white", "gray.900")}
       maxW="2xl"
-      cursor={"pointer"}
+      cursor="pointer"
       transition="all 0.25s"
       _hover={{ transform: "translateY(-4px)", shadow: "sm" }}
       onClick={() => router.push(href)}
@@ -35,12 +35,12 @@ export default function BlogCard(props: PostData) {
         >
           {props.frontMatter.date}
         </chakra.span>
-        <HStack display="flex" alignItems="center" spacing={"1"}>
+        <HStack display="flex" alignItems="center" spacing="1">
           {props.frontMatter.tags?.map((tag) => (
             <Link
               key={tag}
-              px={"3"}
-              py={"1"}
+              px="3"
+              py="1"
               bg="gray.600"
               color="gray.100"
               fontSize="sm"
@@ -54,7 +54,7 @@ export default function BlogCard(props: PostData) {
         </HStack>
       </Flex>
 
-      <Box mt={2}>
+      <Box mt="2">
         <NextLink href={href}>
           <Link
             fontSize="2xl"
@@ -70,12 +70,12 @@ export default function BlogCard(props: PostData) {
           </Link>
         </NextLink>
 
-        <chakra.p mt={"2"} color={useColorModeValue("gray.600", "gray.300")}>
+        <chakra.p mt="2" color={useColorModeValue("gray.600", "gray.300")}>
           {props.frontMatter.description}
         </chakra.p>
       </Box>
 
-      <Flex justifyContent="space-between" alignItems="center" mt={"4"}>
+      <Flex justifyContent="space-between" alignItems="center" mt="4">
         <NextLink href={href}>
           <Link
             color={useColorModeValue("brand.600", "brand.400")}

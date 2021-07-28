@@ -23,7 +23,7 @@ export default function NavBar() {
     <chakra.header
       w="full"
       px={{ base: "2", sm: "4" }}
-      py={"4"}
+      py="4"
       shadow="md"
       bg={bg}
     >
@@ -42,20 +42,20 @@ export default function NavBar() {
         </Flex>
         <HStack display="flex" alignItems="center" spacing={1}>
           <HStack
-            spacing={"1"}
-            mr={"1"}
+            spacing="1"
+            mr="1"
             color="brand.500"
             display={{ base: "none", md: "inline-flex" }}
           >
             {/* TODO: Make Custom Link Component */}
             <NextLink href="/blog" passHref>
-              <Link px={"3"}>Blog</Link>
+              <Link px="3">Blog</Link>
             </NextLink>
             <NextLink href="/experience" passHref>
-              <Link px={"3"}>Experience</Link>
+              <Link px="3">Experience</Link>
             </NextLink>
             <NextLink href="/projects" passHref>
-              <Link px={"3"}>Projects</Link>
+              <Link px="3">Projects</Link>
             </NextLink>
             <IconButton
               aria-label="Toggle Dark Mode"

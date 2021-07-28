@@ -30,15 +30,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <NavBar />
 
       <Center>
-        <Box
-          w="full"
-          mx="auto"
-          maxW="3xl"
-          minH="md"
-          px={"2"}
-          pt={"12"}
-          pb={"24"}
-        >
+        <Box w="full" mx="auto" maxW="3xl" minH="md" px="2" pt="12" pb="24">
           {children}
         </Box>
       </Center>
