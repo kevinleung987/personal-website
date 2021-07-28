@@ -17,7 +17,7 @@ export default function Post({ mdxSource, readingTime, frontMatter }: IProps) {
       <Heading fontSize="6xl">{frontMatter.title}</Heading>
       <Heading fontSize="xl">Published: {frontMatter.date}</Heading>
       <Heading fontSize="xl">Reading Time: {readingTime}</Heading>
-      <Heading fontSize="3xl" py={"6"}>
+      <Heading fontSize="3xl" py="6">
         {frontMatter.description}
       </Heading>
       <Divider />
