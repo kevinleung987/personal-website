@@ -1,8 +1,105 @@
 ---
 title: Building My Website
-description: How I built my new website using React, NextJS, MDX, 
+description: How I built my new website using React, NextJS, MDX, and Chakra UI.
 date: "2021-07-21"
-published: true
+published: false
 tags:
-    - example
+  - example
 ---
+
+In this post I'll go over my motivations for creating and maintaining this website, and how it compares to my old
+website. I'll also go over the frameworks that I used to build it and the services that I use to have it accessible over
+the internet.
+
+# Table of Contents
+
+# My Own Website!
+
+I really love the idea of having my own personal space to express myself. This site is essentially some combination of a
+side-project, a place to collect my other side projects, my professional portfolio, and a place to publish thoughts.
+
+I also wanted to build everything myself to have control over every detail. I have complete control over the UI, and I
+even chose a UI framework that lets me change as much as I want about the UI without being stuck to a certain "look"
+(Something I don't really like about certain popular UI frameworks).
+
+Although I'm not anti-platform, I like having ownership over my content without handing over everything to a platform if
+it isn't necessary, I'm not looking for this to become viral or to have my content find users on it's own (In fact I've
+blocked search indexing with a 'no-index' tag). I do use a hosting platform to host the site, but I'm not completely
+beholden to them as I could just as easily throw the site onto a Raspberry Pi.
+
+## Refreshing My Old Website
+
+My old website, which you can find [here](https://old.kevs.tech) was written in plain HTML, using
+[Materialize CSS](https://materializecss.com/) as it's CSS framework and a single CSS file with classes for specific
+styling of components.
+
+The best part about the old setup was that it loaded amazingly fast, given that it had almost no JavaScript except
+anything that came with Materialize. Another advantage with this setup is that because it is just a collection of static
+files it is very cheap to host because there is no backend required and it can just be served from a CDN. There are many
+generous free-tier options available but I used Github Pages which just serves content from your repository for free.
+
+One of the issues with this setup is that it was hard to scale the development of the site, all the markup is in a
+single HTML file (1000+ lines), there isn't a component system, leading to repetitive markup. I was unhappy with
+Materialize because I wanted a UI framework that was more customizable beyond color variations on the default look.
+Lastly I also wanted to add a blog and a way to generate blog pages statically from Markdown files.
+
+The rest of this post offers a look at the solution I arrived at for my website refresh.
+
+## Domain
+
+The world of domain registrars filled with companies that offer what look on the surface like amazing deals, only to
+charge you extra past the second year, or up-charge for services that are essentially free on their end like hiding your
+personal information from WHOIS lookups.
+
+In any case I use [Google Domains](https://domains.google/) which charges a flat fee and doesn't up-sell on any basic
+services like configuring DNS.
+
+## Email Forwarding
+
+Now that I have a domain, a great way to get immediate value out of it is to setup an email forwarder, which lets you
+configure addresses using your domain to forward to your personal email. There are quite a few free providers for this
+kind of service but usually **sending** email using the domain is offered as a paid service though.
+
+I use [ImprovMX](https://improvmx.com/) since I liked the transparency they showed about their business, see their
+[post on what data they log](https://improvmx.com/guides/what-do-we-log/) for example.
+
+## Hosting
+
+One advantage with going with a statically generated website (The compiled output is generated once at build and can be
+served from a web server) is that serving the files have gotten really cheap for platforms that provide this service and
+many offer generous free tiers or will just serve static content for free (For example Github Pages).
+
+Netlify is a service specifically for statically generated sites and offers a generous free tier for hosting. It can
+monitor your Github project for changes to build and deploy the newest version.
+
+# Chakra UI
+
+
+
+# NextJS for Static Generation
+
+NextJS which is a React-based framework for building Statically Generated or Server-Side Rendered (SSR) applications. As
+a framework it prescribes a particular way to build your application but in return it provides many helpful pre-built
+components that you may need.
+
+## Pages
+
+By creating React Component files in the `pages` directory, NextJS will automatically generate a page with that
+component and route it to the file path relative to `pages`. For example the `/pages/example.tsx` would map to
+` /example` and `/pages/blog/index.tsx ` corresponds to the `/blog` page.
+
+In each page, if data fetching is necessary we can implement a `getStaticProps` function, for example to get the list of
+blog posts.
+
+```Typescript
+// Example from NextJS docs.
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const res = await fetch(`https://.../data`)
+  const data = await res.json()
+
+  return { props: { data } }
+}
+```
+
+# Blog Posts in MDX

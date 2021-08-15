@@ -16,13 +16,13 @@ export default function BlogCard(props: PostData) {
   return (
     <Box
       mx="auto"
-      my="4"
+      my="6"
       px="8"
       py="4"
       rounded="lg"
       shadow="lg"
       bg={useColorModeValue("white", "gray.900")}
-      maxW="2xl"
+      maxW="3xl"
       cursor="pointer"
       transition="all 0.25s"
       _hover={{ transform: "translateY(-4px)", shadow: "sm" }}

@@ -45,6 +45,7 @@ export const getPosts = (): PostData[] => {
 };
 
 export const getPostBySlug = (slug: string) => {
+  updateCache();
   const post = cache.find((data) => data.slug === slug);
   return post;
 };
