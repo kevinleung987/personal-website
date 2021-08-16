@@ -7,16 +7,16 @@ import { FrontMatter, getPostBySlug, getSlugs } from "../../lib/blog";
 
 interface IProps {
   mdxSource: any;
-  readingTime: string;
+  time: string;
   frontMatter: FrontMatter;
 }
 
-export default function Post({ mdxSource, readingTime, frontMatter }: IProps) {
+export default function Post({ mdxSource, time, frontMatter }: IProps) {
   return (
     <>
       <Heading fontSize="6xl">{frontMatter.title}</Heading>
       <Heading fontSize="xl">Published: {frontMatter.date}</Heading>
-      <Heading fontSize="xl">Reading Time: {readingTime}</Heading>
+      <Heading fontSize="xl">Reading Time: {time}</Heading>
       <Heading fontSize="3xl" py="6">
         {frontMatter.description}
       </Heading>
@@ -65,7 +65,7 @@ export async function getStaticProps({
   return {
     props: {
       mdxSource,
-      readingTime: post.readingTime,
+      time: post.time,
       frontMatter: post.frontMatter,
     },
   };

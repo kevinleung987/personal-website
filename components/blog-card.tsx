@@ -85,7 +85,7 @@ export default function BlogCard(props: PostData) {
             Read more
           </Link>
         </NextLink>
-        {props.readingTime}
+        {props.time}
       </Flex>
     </Box>
   );

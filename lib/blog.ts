@@ -5,7 +5,7 @@ import readingTime from "reading-time";
 
 export interface PostData {
   slug: string;
-  readingTime: string;
+  time: string;
   content: any;
   frontMatter: FrontMatter;
 }
@@ -19,10 +19,12 @@ export interface FrontMatter {
   tags: string[];
 }
 
+const POSTS_DIR = "posts";
+
 const updateCache = () => {
-  const postFiles = fs.readdirSync(path.join(process.cwd(), "posts"));
-  cache = postFiles.map((fileName) => {
-    const filePath = path.join(process.cwd(), "posts", fileName);
+  const files = fs.readdirSync(path.join(process.cwd(), POSTS_DIR));
+  cache = files.map((fileName) => {
+    const filePath = path.join(process.cwd(), POSTS_DIR, fileName);
     const slug = fileName.replace(/\.mdx/, "");
     const source = fs.readFileSync(filePath);
     // TODO: Validate all fields are present.
@@ -30,7 +32,7 @@ const updateCache = () => {
     const time = readingTime(content).text;
     return {
       slug,
-      readingTime: time,
+      time,
       content,
       frontMatter: data as FrontMatter,
     };

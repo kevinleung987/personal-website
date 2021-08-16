@@ -1,31 +1,35 @@
 ---
 title: Building My Website
 description: How I built my new website using React, NextJS, MDX, and Chakra UI.
-date: "2021-07-21"
-published: false
+date: "2021-08-15"
+published: true
 tags:
   - example
 ---
 
-In this post I'll go over my motivations for creating and maintaining this website, and how it compares to my old
-website. I'll also go over the frameworks that I used to build it and the services that I use to have it accessible over
+In this post I'll go over my motivations for creating and maintaining this website, as well as how it compares to my old
+website. I'll also go over the frameworks that I used to build it and the services that I use to make it accessible over
 the internet.
 
 # Table of Contents
 
-# My Own Website!
+# Why I Build My Own Website
 
-I really love the idea of having my own personal space to express myself. This site is essentially some combination of a
-side-project, a place to collect my other side projects, my professional portfolio, and a place to publish thoughts.
+I really love the idea of having my own personal website built from the ground up to express myself. This site is
+essentially some combination of a side-project, a place to experiment, a professional portfolio, and a place to publish
+my thoughts.
 
-I also wanted to build everything myself to have control over every detail. I have complete control over the UI, and I
-even chose a UI framework that lets me change as much as I want about the UI without being stuck to a certain "look"
-(Something I don't really like about certain popular UI frameworks).
+I wanted to build everything myself to have control over every detail. I also wanted to experiment with the UI
+design-wise, for this reason I chose a UI framework that lets me change as much as I want about the UI without being
+stuck to a certain "look" (Something I don't really like about some popular UI frameworks).
 
-Although I'm not anti-platform, I like having ownership over my content without handing over everything to a platform if
-it isn't necessary, I'm not looking for this to become viral or to have my content find users on it's own (In fact I've
-blocked search indexing with a 'no-index' tag). I do use a hosting platform to host the site, but I'm not completely
-beholden to them as I could just as easily throw the site onto a Raspberry Pi.
+Although I'm not anti-platform, I like having ownership over my content without handing over control of everything to a
+platform, I'm not looking for this to become viral or to have my content find users on it's own (In fact I've blocked
+search indexing with a 'no-index' tag). I do use a hosting platform to host the site, but I'm not completely beholden to
+them as I could just as easily throw the site onto a Raspberry Pi.
+
+Writing the content of my blog posts in Markdown means that I can essentially transplant my posts to any other setup in
+the future, whether I decide to use a different static site generator or build yet another website.
 
 ## Refreshing My Old Website
 
@@ -33,19 +37,21 @@ My old website, which you can find [here](https://old.kevs.tech) was written in 
 [Materialize CSS](https://materializecss.com/) as it's CSS framework and a single CSS file with classes for specific
 styling of components.
 
-The best part about the old setup was that it loaded amazingly fast, given that it had almost no JavaScript except
-anything that came with Materialize. Another advantage with this setup is that because it is just a collection of static
-files it is very cheap to host because there is no backend required and it can just be served from a CDN. There are many
-generous free-tier options available but I used Github Pages which just serves content from your repository for free.
+The best part about the old setup was that it loaded pretty quickly, given that it had almost no JavaScript except
+anything that came with Materialize. Another advantage with this setup is that because it was just a collection of
+static files it was very cheap to host because there is no backend required and it could just be served from a CDN.
+There are many generous free-tier options available but I used Github Pages which just serves files from your repository
+for free.
 
 One of the issues with this setup is that it was hard to scale the development of the site, all the markup is in a
-single HTML file (1000+ lines), there isn't a component system, leading to repetitive markup. I was unhappy with
+single HTML file (1000+ lines), there wasn't a component system, leading to repetitive markup. I was unhappy with
 Materialize because I wanted a UI framework that was more customizable beyond color variations on the default look.
-Lastly I also wanted to add a blog and a way to generate blog pages statically from Markdown files.
+Lastly I wanted to add a blog and a way to generate blog pages statically from Markdown files.
 
-The rest of this post offers a look at the solution I arrived at for my website refresh.
+So I set out into the world to take a look at what tools were available for a modern personal website, and the rest of
+this post offers a look at the solution I arrived at.
 
-## Domain
+## Domain Registration
 
 The world of domain registrars filled with companies that offer what look on the surface like amazing deals, only to
 charge you extra past the second year, or up-charge for services that are essentially free on their end like hiding your
@@ -56,9 +62,9 @@ services like configuring DNS.
 
 ## Email Forwarding
 
-Now that I have a domain, a great way to get immediate value out of it is to setup an email forwarder, which lets you
+Now that we have a domain, a great way to get immediate value out of it is to setup an email forwarde, which lets you
 configure addresses using your domain to forward to your personal email. There are quite a few free providers for this
-kind of service but usually **sending** email using the domain is offered as a paid service though.
+kind of service but usually **sending** email using the domain is offered as a paid service.
 
 I use [ImprovMX](https://improvmx.com/) since I liked the transparency they showed about their business, see their
 [post on what data they log](https://improvmx.com/guides/what-do-we-log/) for example.
@@ -69,37 +75,313 @@ One advantage with going with a statically generated website (The compiled outpu
 served from a web server) is that serving the files have gotten really cheap for platforms that provide this service and
 many offer generous free tiers or will just serve static content for free (For example Github Pages).
 
-Netlify is a service specifically for statically generated sites and offers a generous free tier for hosting. It can
-monitor your Github project for changes to build and deploy the newest version.
+[Netlify](https://www.netlify.com/) is a service specifically for statically generated sites and offers a generous free
+tier for hosting. It can monitor your Github project for changes to build and deploy the newest version.
+
+# React & TypeScript
+
+I use [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlang.org/) for my site. These are both
+extremely popular tools in web development so I won't go too in-depth in this post.
+
+React is a library for building declarative component based interfaces, it has many features for managing component
+state, re-rendering subtrees of components when their properties change, and more. It comes with JSX which is it's own
+syntax for describing the DOM.
+
+```tsx
+// props is passed down from a parent component
+// if it ever changes, this Navbar would re-render.
+return (
+  <Navbar>
+    {props.links.map((link) => (
+      <Link href={link.href} onClick={navigate(link.href)} />
+    ))}
+  </Navbar>
+);
+```
+
+TypeScript is a language that builds on top of JavaScript, it compiles down to JavaScript in the end and essentially
+lets you write JavaScript with types, along with other extra syntax that the TypeScript compiler supports.
 
 # Chakra UI
 
+[Chakra UI](https://chakra-ui.com/) is a React UI framework centered around building modern UI components while having
+complete control over the look and feel of your application.
 
+Where alot of popular frameworks will provide default components for large parts of your application like the Navbar or
+Card components, Chakra UI only provides the essentials, essentially just wrappers on top of the base HTML tags, with
+helper properties and theme variables (Like for font sizes or colors).
+
+It provides a simple API surface and doesn't force you into a specific aesthetic, you're meant to compose your own
+components and style them yourself. Only the most basic components like Buttons are provided and the default theme, I
+think of it like [TailwindCSS](https://tailwindcss.com/) but for React.
+
+It also comes with an icon library and animations through [Framer Motion](https://www.framer.com/motion/), here's an
+example of the container `<Box>` component used in the blog index page. We can describe vertical margin with helpers
+like `my` and use font size variables like `lg` to set the size of the `box-shadow`. Hooks like `useColorModeValue` let
+us set specific colors based on the user's Light/Dark mode.
+
+```tsx
+<Box
+  mx="auto"
+  my="6"
+  px="8"
+  py="4"
+  rounded="lg"
+  shadow="lg"
+  bg={useColorModeValue("white", "gray.900")}
+  maxW="3xl"
+  cursor="pointer"
+  whileHover={{
+    translateY: -4,
+    transition: { duration: 0.25 },
+  }}
+  onClick={() => router.push(href)}
+/>
+```
 
 # NextJS for Static Generation
 
-NextJS which is a React-based framework for building Statically Generated or Server-Side Rendered (SSR) applications. As
-a framework it prescribes a particular way to build your application but in return it provides many helpful pre-built
-components that you may need.
+[NextJS](https://nextjs.org/) is a React-based framework for building **Statically Generated** or **Server-Side
+Rendered** (SSR) applications. As a framework it forces me to structure my application in a certain way but in return it
+provides many helpful features for statically generated sites.
+
+I went for the static generation route, which means the output files are compiled once at build time and served from a
+CDN or any other web server. Because you only need to serve static files, a persistent backend server isn't required and
+it has gotten very cheap to serve static files in recent years so many platforms offer generous free tiers.
+
+NextJS also comes with development goodies like ESLint, TypeScript, and Fast Refresh for development builds built in,
+this makes development a breeze.
 
 ## Pages
 
-By creating React Component files in the `pages` directory, NextJS will automatically generate a page with that
-component and route it to the file path relative to `pages`. For example the `/pages/example.tsx` would map to
-` /example` and `/pages/blog/index.tsx ` corresponds to the `/blog` page.
+By creating React component files in the `pages` directory, NextJS will automatically generate a page with that
+component and route it to path corresponding it. For example `/pages/example.tsx` would map to `/example` and
+`/pages/blog/index.tsx ` corresponds to the `/blog` page (This is because we also have `[slug].tsx` in the same
+directory so we have a component that represents the index page).
 
-In each page, if data fetching is necessary we can implement a `getStaticProps` function, for example to get the list of
-blog posts.
+In each page, if data fetching is necessary we can implement a `getStaticProps` function which can be run when the page
+is statically generated to provide data. This is **not** code that runs on the client, it is run on a server when the
+application is built (Usually triggered by a push to the Github repo).
 
-```Typescript
-// Example from NextJS docs.
-export async function getServerSideProps() {
-  // Fetch data from external API
-  const res = await fetch(`https://.../data`)
-  const data = await res.json()
+```tsx
+function Example({ data }) {
+  return (
+    <div>
+      {data.map((foo) => (
+        <p>{foo.bar}</p>
+      ))}
+    </div>
+  );
+}
 
-  return { props: { data } }
+export async function getStaticProps() {
+  // Fetch data from external API, this could also be a file system read or any other data fetching.
+  const res = await fetch(`https://.../data`);
+  const data = await res.json();
+
+  return { props: { data } };
 }
 ```
 
-# Blog Posts in MDX
+## Static Export & Pre-fetching
+
+Lets take a look at how NextJS helps us with serving static files that have a quick load time.
+
+After building with NextJS I get a static export in my output directory that looks like this, with hashes replaced with
+`%`:
+
+```markup
+├── 404.html
+├── blog
+|  ├── building-my-website.html
+├── blog.html
+├── experience.html
+├── favicon.ico
+├── index.html
+├── logo.png
+├── projects.html
+└── _next
+   ├── data
+   |  └── %%%%%%%%%%%%
+   |     ├── blog
+   |     |  ├── building-my-website.json
+   |     └── blog.json
+   └── static
+      ├── chunks
+      |  ├── 346-%%%%%%%%%%%%.js
+      |  ├── framework-%%%%%%%%%%%%.js
+      |  ├── main-%%%%%%%%%%%%.js
+      |  ├── pages
+      |  |  ├── blog
+      |  |  ├── blog-%%%%%%%%%%%%.js
+      |  |  ├── experience-%%%%%%%%%%%%.js
+      |  |  ├── index-%%%%%%%%%%%%.js
+      |  |  ├── projects-%%%%%%%%%%%%.js
+      |  |  ├── _app-%%%%%%%%%%%%.js
+      |  |  └── _error-%%%%%%%%%%%%.js
+      |  ├── polyfills-%%%%%%%%%%%%.js
+      |  └── webpack-%%%%%%%%%%%%.js
+      ├── css
+      |  └── %%%%%%%%%%%%.css
+      ├── media
+      |  ├── Bunch of Fonts
+```
+
+Hosted on a web server, this essentially allows any of the `.html` files to serve as entry-points into the app, these
+point to the necessary chunks needed to get the NextJS framework running and all the content for that page. Once the app
+has been loaded, navigating to other pages only requires that the app loads the `.js` chunks needed for that page. In
+the case of any pages that require data-fetching, the data also needs to be loaded in.
+
+For simple pages this can be a small amount of data but for more complex pages that might have external dependencies,
+this could be a sizable amount of data that needs to be fetched on load. One way NextJS solves this is by prefetching
+resources for other pages that can be navigated to from the user's current page.
+
+When a `<Link>` component is rendered, it will prefetch the chunks relevant to that page, however because we're using
+Chakra UI which has it's own `<Link>` component, we need to wrap them together like so:
+
+```tsx
+<NextLink href="/blog" passHref>
+  <Link>Blog</Link>
+</NextLink>
+```
+
+Prefetching essentially gives us the performance and feel of a **Single Page Application** (An application where
+everything necessary to render any of it's pages is already loaded) but the load-time of a static one. For example, you
+can load into the homepage of the site, and the browser will initially only fetch what is necessary to render it, and
+once that is complete it will start prefetching the data for any other pages corresponding to the `<Link>` components on
+the page.
+
+# Blog Posts in NextJS with MDX
+
+I wanted to write the content of my posts in Markdown and let NextJS generate the content of each page, this means that
+the actual content of the blogs is separate from the UI. If I ever decided that I wanted to move the content elsewhere
+or change how the blog posts look, alot less work would need to be done.
+
+While Markdown is great for text, it doesn't support custom embedded UI elements, for example a video player or custom
+UI widgets. Luckily I can use [MDX](https://mdxjs.com/) which lets me embed React components into the content of the
+posts.
+
+There's quite a few pieces that fit together in order to process these MDX files into a NextJS page, let's take a look
+at the code to that reads the files and processes them initially:
+
+```ts:utils/blog.ts
+const updateCache = () => {
+  const files = fs.readdirSync(path.join(process.cwd(), POSTS_DIR));
+  cache = files.map((fileName) => {
+    const filePath = path.join(process.cwd(), POSTS_DIR, fileName);
+    const slug = fileName.replace(/\.mdx/, "");
+    const source = fs.readFileSync(filePath);
+    const { data, content } = matter(source);
+    const time = readingTime(content).text;
+    return {
+      slug,
+      time,
+      content,
+      frontMatter: data as FrontMatter,
+    };
+  });
+};
+```
+
+First, the `fs` module from Node is used to read from the file system to get all the `.mdx` files in our `posts`
+directory.
+
+After that, the `gray-matter` library is used to separate the "front-matter", which is read into `data`, from the
+regular content of the blog post which is stored into `content`, this is essentially metadata that is embedded at the
+top of each blog post that lets us specify things like the `title`.
+
+```yaml
+---
+title: Example Post
+description: Example Description
+date: "2021-07-21"
+published: false
+tags:
+  - example
+---
+```
+
+After that I use a library to count the number of words in the post to estimate the reading time. This is all stored in
+a cache because other functions fetching blog data at build time will need to access the same information.
+
+Now that we have our MDX content available in our code and any other metadata we needed, let's take a look at how we can
+render it in React.
+
+If you'll recall from earlier, NextJS will generate routes for our `.tsx` files placed in `/pages/`, but we can also
+have wildcard pages which support multiple paths (Defined by `getStaticPaths`).
+
+```tsx:/pages/blog/[slug].tsx
+// Component that renders the blog content.
+<MDXRemote {...mdxSource} components={MDXComponents} />
+
+// getStaticPaths defines the valid paths for this wildcard. (not shown)
+
+// getStaticProps which fetches data for the page.
+const post = getPostBySlug(params.slug);
+  if (post == null) {
+    throw new Error();
+  }
+
+  const mdxSource = await serialize(post.content, {
+    mdxOptions: {
+      remarkPlugins: [
+        require("remark-slug"),
+        require("remark-code-titles"),
+        require("remark-toc"),
+      ],
+      rehypePlugins: [require("mdx-prism")],
+    },
+  });
+  return {
+    props: {
+      mdxSource,
+      time: post.time,
+      frontMatter: post.frontMatter,
+    },
+  };
+```
+
+I use the `next-remote-mdx` library which provides the `serialize` function to process everything and the
+`<MDXRemote />` React component to render the content.
+
+This library is powered by `remark` which is a Markdown processor and we can use plugins like `remark-slug` to add ID
+tags to every heading which means they can be jumped to from the Table of Contents (Which is generated by `remark-toc`),
+and any code blocks are optionally annotated with the title of the file using `remark-code-titles`.
+
+There is also support for `rehype` which is an HTML processor that lets us format the output of our MDX. I use this to
+power syntax highlighting for code blocks through the `mdx-prism` plugin.
+
+After all this processing, the end result is passed to `<MDXRemote />` which renders the content in React using a
+mapping of Markdown tags to React components which I pass in through `MDXComponents`.
+
+These are used to tell it what it needs to render for each corresponding Markdown/HTML tag. This is also where I would
+define any custom components that might show up in the MDX content, so it would know for example that encountering
+`<Component />` in the MDX content it would need to render the `<Component foo={bar} />` React component.
+
+Below you can find an excerpt of this, showing a mapping of Markdown/HTML tags to components from Chakra UI.
+
+```ts
+const MDXComponents = {
+  p: (props: any) => <Text fontSize="lg" my="3" {...props} />,
+  h1: (props: any) => <Heading fontSize="3xl" my="3" {...props} />,
+  h2: (props: any) => <Heading fontSize="2xl" my="3" {...props} />,
+  h3: (props: any) => <Heading fontSize="xl" my="3" {...props} />,
+  ...
+}
+```
+
+You can find an example post that I created to test the completeness of my mapping to MDX [here](./example).
+
+The ecosystem around using Markdown to generate blogs is surprisingly mature, and alternative Static Site Generators
+like Jekyll operate entirely on this principle.
+
+# Conclusion
+
+Before this rewrite of my personal website (Which was in plain HTML) I had never touched any of the technologies or
+libraries above except for React and TypeScript, and it turned out to be a great opportunity to see what the state of
+the world is like for building a modern personal website.
+
+Overall I'm very pleased with how the site has turned out, and it feels like a great foundation for future content and
+experimentation.
+
+I hope you enjoyed this technical dive into what I thought were the interesting parts of building this site!
