@@ -3,7 +3,8 @@ import "@fontsource/open-sans";
 import "@fontsource/roboto";
 import type { AppProps } from "next/app";
 import Layout from "../components/layout";
-import '../styles/code.css';
+import { usePanelbear } from "../lib/analytics";
+import "../styles/code.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   // TODO: Figure out font loading issue.
@@ -14,6 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       body: "Open Sans",
     },
   });
+  usePanelbear("65NqpvSqmke");
   // const { colorMode } = useColorMode();
   return (
     <ChakraProvider theme={theme}>
