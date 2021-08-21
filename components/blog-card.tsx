@@ -9,10 +9,12 @@ import {
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { PostData } from "../lib/blog";
+import ColorHash from "color-hash";
 
 export default function BlogCard(props: PostData) {
   const href = `/blog/${props.slug}`;
   const router = useRouter();
+  const colorHash = new ColorHash();
   return (
     <Box
       mx="auto"
@@ -41,8 +43,8 @@ export default function BlogCard(props: PostData) {
               key={tag}
               px="3"
               py="1"
-              bg="gray.600"
-              color="gray.100"
+              bg={colorHash.hex(tag)}
+              color="gray.200"
               fontSize="sm"
               fontWeight="700"
               rounded="md"

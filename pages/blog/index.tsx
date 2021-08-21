@@ -22,10 +22,7 @@ export default function Blog(props: IProps) {
       </Text>
       {props.posts
         .filter((post) => {
-          if (isDev()) {
-            return true;
-          }
-          return post.frontMatter.published;
+          return isDev() || post.frontMatter.published;
         })
         .map((post, idx) => (
           <BlogCard key={idx} {...post} />

@@ -30,6 +30,7 @@ export default function TopButton() {
             }}
             transition={{ ease: "linear", duration: 1, repeat: 3 }}
             bg="black"
+            color="white"
             position="fixed"
             bottom="6em"
             right={["16px", "32px", "64px"]}

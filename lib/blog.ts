@@ -36,6 +36,10 @@ const updateCache = () => {
       content,
       frontMatter: data as FrontMatter,
     };
+  }).sort((a, b) => {
+    const aDate = new Date(a.frontMatter.date);
+    const bDate = new Date(b.frontMatter.date);
+    return bDate.getTime() - aDate.getTime();
   });
 };
 

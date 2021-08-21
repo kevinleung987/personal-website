@@ -15,12 +15,11 @@ export default function Post({ mdxSource, time, frontMatter }: IProps) {
   return (
     <>
       <Heading fontSize="6xl">{frontMatter.title}</Heading>
-      <Heading fontSize="xl">Published: {frontMatter.date}</Heading>
-      <Heading fontSize="xl">Reading Time: {time}</Heading>
-      <Heading fontSize="3xl" py="6">
+      <Divider />
+      <Heading fontSize="xl">{frontMatter.date} {" • "} {time}</Heading>
+      <Heading fontSize="3xl" py="3">
         {frontMatter.description}
       </Heading>
-      <Divider />
       <MDXRemote {...mdxSource} components={MDXComponents} />
       <TopButton />
     </>

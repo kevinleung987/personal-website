@@ -1,0 +1,4 @@
+/* To get rid of weird spacing in Table of Contents */
+li > p {
+  margin: 0 !important;
+}

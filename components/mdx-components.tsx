@@ -42,9 +42,9 @@ const MDXComponents = {
       {...props}
     />
   ),
-  ul: (props: any) => <UnorderedList fontSize="lg" my={VERT_SPACE}{...props} />,
-  ol: (props: any) => <OrderedList fontSize="lg" my={VERT_SPACE}{...props} />,
-  li: (props: any) => <ListItem fontSize="lg" my={VERT_SPACE}{...props} />,
+  ul: (props: any) => <UnorderedList fontSize="lg" {...props} />,
+  ol: (props: any) => <OrderedList fontSize="lg" {...props} />,
+  li: (props: any) => <ListItem fontSize="lg" {...props} />,
   // TODO: Customize table?
   table: (props: any) => <Table variant="simple" {...props} />,
   thead: (props: any) => <Thead {...props} />,
