@@ -1,20 +1,24 @@
-import {
-  Box,
-  chakra,
-  Flex,
-  HStack,
-  Link,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Box, chakra, Flex, HStack, Link, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { PostData } from "../lib/blog";
 import ColorHash from "color-hash";
 
+const customHash = (str: string) => {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash += str.charCodeAt(i);
+  }
+  return hash;
+};
+
 export default function BlogCard(props: PostData) {
   const href = `/blog/${props.slug}`;
   const router = useRouter();
-  const colorHash = new ColorHash();
+  const { colorMode } = useColorMode();
+  const colorSettings =
+    colorMode == "light" ? { lightness: 0.5, saturation: 1 } : { lightness: 0.25, saturation: 0.75 };
+  const colorHash = new ColorHash({ hash: customHash, ...colorSettings });
   return (
     <Box
       mx="auto"
@@ -31,10 +35,7 @@ export default function BlogCard(props: PostData) {
       onClick={() => router.push(href)}
     >
       <Flex justifyContent="space-between" alignItems="center">
-        <chakra.span
-          fontSize="sm"
-          color={useColorModeValue("gray.600", "gray.400")}
-        >
+        <chakra.span fontSize="sm" color={useColorModeValue("gray.600", "gray.400")}>
           {props.frontMatter.date}
         </chakra.span>
         <HStack display="flex" alignItems="center" spacing="1">
@@ -44,7 +45,7 @@ export default function BlogCard(props: PostData) {
               px="3"
               py="1"
               bg={colorHash.hex(tag)}
-              color="gray.200"
+              color={colorMode == "light" ? "gray.800" : "gray.200"}
               fontSize="sm"
               fontWeight="700"
               rounded="md"
@@ -79,11 +80,7 @@ export default function BlogCard(props: PostData) {
 
       <Flex justifyContent="space-between" alignItems="center" mt="4">
         <NextLink href={href}>
-          <Link
-            color={useColorModeValue("brand.600", "brand.400")}
-            _hover={{ textDecor: "underline" }}
-            href={href}
-          >
+          <Link color={useColorModeValue("brand.600", "brand.400")} _hover={{ textDecor: "underline" }} href={href}>
             Read more
           </Link>
         </NextLink>
