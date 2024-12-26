@@ -1,4 +1,4 @@
-import { Divider, Heading, Text} from "@chakra-ui/react";
+import { Heading, Text} from "@chakra-ui/react";
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import MDXComponents from "../../components/mdx-components";
@@ -15,7 +15,7 @@ export default function Post({ mdxSource, time, frontMatter }: IProps) {
   return (
     <>
       <Heading fontSize="5xl">{frontMatter.title}</Heading>
-      <Divider />
+      {/* <Divider /> */}
       <Heading fontSize="xl">{frontMatter.date} {" • "} {time}</Heading>
       <MDXRemote {...mdxSource} components={MDXComponents} />
       <TopButton />

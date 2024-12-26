@@ -1,27 +1,11 @@
-import {
-  Box,
-  chakra,
-  Container,
-  Divider,
-  Flex,
-  Stack,
-  Text,
-  useColorModeValue,
-  VisuallyHidden,
-} from "@chakra-ui/react";
+import { Box, chakra, Container, Flex, Stack, Text, VisuallyHidden } from "@chakra-ui/react";
 import { ReactNode } from "react";
+import { useColorMode, useColorModeValue } from "../components/ui/color-mode";
 import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 
-const SocialButton = ({
-  children,
-  label,
-  href,
-}: {
-  children: ReactNode;
-  label: string;
-  href: string;
-}) => {
+const SocialButton = ({ children, label, href }: { children: ReactNode; label: string; href: string }) => {
   return (
+    // @ts-ignore
     <chakra.button
       bg={useColorModeValue("blackAlpha.100", "whiteAlpha.100")}
       rounded="full"
@@ -55,27 +39,18 @@ export default function Footer() {
       width="100%"
     >
       <Container as={Stack} maxW="3xl" px="0">
-        <Divider />
+        {/* <Divider /> */}
         <Flex
-          spacing="4"
           direction={{ base: "column", md: "row" }}
           justify={{ base: "center", md: "space-between" }}
           align={{ base: "center", md: "center" }}
         >
-          <Text display={{ base: "none", md: "flex" }}>
-            Kevin Leung - Built with NextJS.
-          </Text>
-          <Stack direction="row" spacing="6">
-            <SocialButton
-              label="LinkedIn"
-              href="https://www.linkedin.com/in/kevinleung987/"
-            >
+          <Text display={{ base: "none", md: "flex" }}>Kevin Leung - Built with NextJS.</Text>
+          <Stack direction="row">
+            <SocialButton label="LinkedIn" href="https://www.linkedin.com/in/kevinleung987/">
               <FaLinkedin />
             </SocialButton>
-            <SocialButton
-              label="GitHub"
-              href="https://github.com/kevinleung987"
-            >
+            <SocialButton label="GitHub" href="https://github.com/kevinleung987">
               <FaGithub />
             </SocialButton>
           </Stack>

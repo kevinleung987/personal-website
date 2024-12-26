@@ -1,5 +1,6 @@
-import { Box, chakra, Flex, HStack, Link, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { Box, chakra, Flex, HStack, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
+import { useColorMode, useColorModeValue } from "../components/ui/color-mode";
 import { useRouter } from "next/router";
 import { PostData } from "../lib/blog";
 import ColorHash from "color-hash";
@@ -27,7 +28,7 @@ export default function BlogCard(props: PostData) {
       py="4"
       rounded="lg"
       shadow="lg"
-      bg={useColorModeValue("white", "gray.900")}
+      // bg={useColorModeValue("white", "gray.900")}
       maxW="3xl"
       cursor="pointer"
       transition="all 0.25s"
@@ -35,10 +36,11 @@ export default function BlogCard(props: PostData) {
       onClick={() => router.push(href)}
     >
       <Flex justifyContent="space-between" alignItems="center">
+        {/* @ts-ignore */}
         <chakra.span fontSize="sm" color={useColorModeValue("gray.600", "gray.400")}>
           {props.frontMatter.date}
         </chakra.span>
-        <HStack display="flex" alignItems="center" spacing="1">
+        <HStack display="flex" alignItems="center">
           {props.frontMatter.tags?.map((tag) => (
             <Link
               key={tag}
@@ -57,7 +59,7 @@ export default function BlogCard(props: PostData) {
         </HStack>
       </Flex>
 
-      <Box mt="2">
+      {/* <Box mt="2">
         <NextLink href={href}>
           <Link
             fontSize="2xl"
@@ -85,7 +87,7 @@ export default function BlogCard(props: PostData) {
           </Link>
         </NextLink>
         {props.time}
-      </Flex>
+      </Flex> */}
     </Box>
   );
 }

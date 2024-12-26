@@ -1,14 +1,6 @@
 import { HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  chakra,
-  Flex,
-  HStack,
-  IconButton,
-  Link,
-  useColorMode,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Box, chakra, Flex, HStack, IconButton, Link } from "@chakra-ui/react";
+import { useColorMode, useColorModeValue, ColorModeIcon } from "../components/ui/color-mode";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
@@ -20,19 +12,9 @@ export default function NavBar() {
   // const mobileNav = useDisclosure();
 
   return (
-    <chakra.header
-      w="full"
-      px={{ base: "2", sm: "4" }}
-      py="4"
-      shadow="md"
-      bg={bg}
-    >
-      <Flex
-        alignItems="center"
-        justifyContent="space-between"
-        mx="auto"
-        maxW="3xl"
-      >
+    // @ts-ignore
+    <chakra.header w="full" px={{ base: "2", sm: "4" }} py="4" shadow="md" bg={bg}>
+      <Flex alignItems="center" justifyContent="space-between" mx="auto" maxW="3xl">
         <Flex>
           <NextLink href="/" passHref>
             <Link cursor="pointer" fontSize="xl" fontWeight="medium" ml="2">
@@ -40,13 +22,8 @@ export default function NavBar() {
             </Link>
           </NextLink>
         </Flex>
-        <HStack display="flex" alignItems="center" spacing={1}>
-          <HStack
-            spacing="1"
-            mr="1"
-            color="brand.500"
-            display={{ base: "none", md: "inline-flex" }}
-          >
+        <HStack display="flex" alignItems="center">
+          <HStack mr="1" color="brand.500" display={{ base: "none", md: "inline-flex" }}>
             {/* TODO: Make Custom Link Component */}
             {/* <NextLink href="/blog" passHref>
               <Link px="3">Blog</Link>
@@ -57,12 +34,9 @@ export default function NavBar() {
             <NextLink href="/projects" passHref>
               <Link px="3">Projects</Link>
             </NextLink> */}
-            <IconButton
-              aria-label="Toggle Dark Mode"
-              icon={colorMode === "light" ? <SunIcon /> : <MoonIcon />}
-              onClick={toggleColorMode}
-              isRound={true}
-            />
+            <IconButton aria-label="Toggle Dark Mode" onClick={toggleColorMode} rounded="full">
+              <ColorModeIcon />
+            </IconButton>
           </HStack>
           {/* TODO: Mobile nav */}
           <Box display={{ base: "inline-flex", md: "none" }}>
@@ -72,9 +46,10 @@ export default function NavBar() {
               fontSize="20px"
               color={useColorModeValue("gray.800", "inherit")}
               variant="ghost"
-              icon={<HamburgerIcon />}
               // onClick={mobileNav.onOpen}
-            />
+            >
+              <HamburgerIcon />
+            </IconButton>
           </Box>
         </HStack>
       </Flex>
