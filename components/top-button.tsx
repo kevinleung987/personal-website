@@ -23,7 +23,7 @@ export default function TopButton() {
   return (
     <>
       {isVisible && (
-        <Link to="/#top">
+        <Link>
           <MotionIconButton
             animate={{
               scale: [1, 1.2, 1.5, 1.2, 1],

@@ -48,7 +48,7 @@ export default function NavBar() {
             display={{ base: "none", md: "inline-flex" }}
           >
             {/* TODO: Make Custom Link Component */}
-            <NextLink href="/blog" passHref>
+            {/* <NextLink href="/blog" passHref>
               <Link px="3">Blog</Link>
             </NextLink>
             <NextLink href="/experience" passHref>
@@ -56,7 +56,7 @@ export default function NavBar() {
             </NextLink>
             <NextLink href="/projects" passHref>
               <Link px="3">Projects</Link>
-            </NextLink>
+            </NextLink> */}
             <IconButton
               aria-label="Toggle Dark Mode"
               icon={colorMode === "light" ? <SunIcon /> : <MoonIcon />}

@@ -42,6 +42,7 @@ export async function getStaticProps({
 }): Promise<{ props: IProps }> {
   const post = getPostBySlug(params.slug);
   if (post == null) {
+    // TODO: Custom error page
     throw new Error();
   }
 

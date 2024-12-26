@@ -63,12 +63,9 @@ export default function Footer() {
           align={{ base: "center", md: "center" }}
         >
           <Text display={{ base: "none", md: "flex" }}>
-            © 2021 Kevin Leung - Built with NextJS and Chakra UI.
+            Kevin Leung - Built with NextJS.
           </Text>
           <Stack direction="row" spacing="6">
-            <SocialButton label="Email" href="mailto:contact@kevs.tech">
-              <FaEnvelope />
-            </SocialButton>
             <SocialButton
               label="LinkedIn"
               href="https://www.linkedin.com/in/kevinleung987/"

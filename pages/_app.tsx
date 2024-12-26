@@ -3,7 +3,6 @@ import "@fontsource/open-sans";
 import "@fontsource/roboto";
 import type { AppProps } from "next/app";
 import Layout from "../components/layout";
-import { usePanelbear } from "../lib/analytics";
 import "../styles/globals.css";
 import "../styles/code.css";
 
@@ -16,7 +15,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       body: "Open Sans",
     },
   });
-  usePanelbear("65NqpvSqmke");
   // const { colorMode } = useColorMode();
   return (
     <ChakraProvider theme={theme}>

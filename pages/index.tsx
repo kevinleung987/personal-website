@@ -16,8 +16,7 @@ export default function Home() {
         studied Computer Science.
       </Text>
       <Text fontSize="xl" pt="8">
-        Currently I'm working as a Software Engineer at Google in the San
-        Francisco Bay Area.
+        Currently I'm working as a Software Engineer at Google in Seattle.
       </Text>
     </>
   );
